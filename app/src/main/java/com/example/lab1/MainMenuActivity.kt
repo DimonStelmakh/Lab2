@@ -16,10 +16,10 @@ class MainMenuActivity : ComponentActivity() {
             startActivity(intent)
         }
 
-        val buttonCalculator2 = findViewById<Button>(R.id.buttonCalculator2)
-        buttonCalculator2.setOnClickListener {
-            val intent = Intent(this, Task2Activity::class.java)
-            startActivity(intent)
-        }
+//        val buttonCalculator2 = findViewById<Button>(R.id.buttonCalculator2)
+//        buttonCalculator2.setOnClickListener {
+//            val intent = Intent(this, Task2Activity::class.java)
+//            startActivity(intent)
+//        }
     }
 }

@@ -7,145 +7,110 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/inputH"
+        android:id="@+id/coalVolume"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Водень (H), %" />
+        android:hint="Обсяг донецького газового вугілля марки ГР, т" />
 
     <EditText
-        android:id="@+id/inputC"
+        android:id="@+id/oilFuelVolume"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Вуглець (C), %" />
+        android:hint="Обсяг високосірчистого мазуту марки 40, т" />
 
     <EditText
-        android:id="@+id/inputS"
+        android:id="@+id/naturalGasVolume"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Сірка (S), %" />
+        android:hint="Обсяг природного газу із газопроводу Уренгой-Ужгород, м3" />
 
-    <EditText
-        android:id="@+id/inputN"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Азот (N), %" />
+<!--    <EditText-->
+<!--        android:id="@+id/inputN"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Азот (N), %" />-->
 
-    <EditText
-        android:id="@+id/inputO"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Кисень (O), %" />
+<!--    <EditText-->
+<!--        android:id="@+id/inputO"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Кисень (O), %" />-->
 
-    <EditText
-        android:id="@+id/inputW"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Волога (W), %" />
+<!--    <EditText-->
+<!--        android:id="@+id/inputW"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Волога (W), %" />-->
 
-    <EditText
-        android:id="@+id/inputA"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Зола (A), %" />
+<!--    <EditText-->
+<!--        android:id="@+id/inputA"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Зола (A), %" />-->
 
     <Button
         android:id="@+id/calculateButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:text="Розрахувати" />
 
     <TextView
-        android:id="@+id/dryMassTitle"
+        android:id="@+id/coaTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Суха маса"
+        android:text="Вугілля"
         android:textStyle="bold"
         android:paddingTop="16dp"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/dryMassH"
+        android:id="@+id/coalSolidParticlesEmission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/dryMassC"
+        android:id="@+id/coalGrossEmission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/dryMassS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/dryMassN"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/dryMassO"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/dryMassA"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/combustibleMassTitle"
+        android:id="@+id/oilFuelTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Горюча маса"
+        android:text="Мазут"
         android:textStyle="bold"
         android:paddingTop="16dp"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/combustibleMassH"
+        android:id="@+id/oilFuelSolidParticlesEmission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/combustibleMassC"
+        android:id="@+id/oilFuelGrossEmission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/combustibleMassS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/combustibleMassN"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/combustibleMassO"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/resultWorkingText"
+        android:id="@+id/naturalGasTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Природний газ"
+        android:textStyle="bold"
         android:paddingTop="16dp"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/resultDryText"
+        android:id="@+id/naturalGasSolidParticlesEmission"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:textSize="16sp" />
+        android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/resultCombustibleText"
+        android:id="@+id/naturalGasGrossEmission"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:textSize="16sp" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
