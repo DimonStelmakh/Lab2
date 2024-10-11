@@ -12,84 +12,67 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.lab1.ui.theme.Lab1Theme
+import kotlin.math.pow
 
 class Task1Activity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task1)
 
-        val inputH = findViewById<EditText>(R.id.inputH)
-        val inputC = findViewById<EditText>(R.id.inputC)
-        val inputS = findViewById<EditText>(R.id.inputS)
-        val inputN = findViewById<EditText>(R.id.inputN)
-        val inputO = findViewById<EditText>(R.id.inputO)
-        val inputW = findViewById<EditText>(R.id.inputW)
-        val inputA = findViewById<EditText>(R.id.inputA)
+        val inputCoalVolume = findViewById<EditText>(R.id.coalVolume)
+        val inputOilFuelVolume = findViewById<EditText>(R.id.oilFuelVolume)
+        val inputNaturalGasVolume = findViewById<EditText>(R.id.naturalGasVolume)
 
         val calculateButton = findViewById<Button>(R.id.calculateButton)
 
-        val dryMassH = findViewById<TextView>(R.id.dryMassH)
-        val dryMassC = findViewById<TextView>(R.id.dryMassC)
-        val dryMassS = findViewById<TextView>(R.id.dryMassS)
-        val dryMassN = findViewById<TextView>(R.id.dryMassN)
-        val dryMassO = findViewById<TextView>(R.id.dryMassO)
-        val dryMassA = findViewById<TextView>(R.id.dryMassA)
+        val coalSolidParticlesEmission = findViewById<TextView>(R.id.coalSolidParticlesEmission)
+        val coalGrossEmission = findViewById<TextView>(R.id.coalGrossEmission)
 
-        val combustibleMassH = findViewById<TextView>(R.id.combustibleMassH)
-        val combustibleMassC = findViewById<TextView>(R.id.combustibleMassC)
-        val combustibleMassS = findViewById<TextView>(R.id.combustibleMassS)
-        val combustibleMassN = findViewById<TextView>(R.id.combustibleMassN)
-        val combustibleMassO = findViewById<TextView>(R.id.combustibleMassO)
+        val oilFuelSolidParticlesEmission = findViewById<TextView>(R.id.oilFuelSolidParticlesEmission)
+        val oilFuelGrossEmission = findViewById<TextView>(R.id.oilFuelGrossEmission)
 
-        val resultWorkingText = findViewById<TextView>(R.id.resultWorkingText)
-        val resultDryText = findViewById<TextView>(R.id.resultDryText)
-        val resultCombustibleText = findViewById<TextView>(R.id.resultCombustibleText)
+        val naturalGasSolidParticlesEmission = findViewById<TextView>(R.id.naturalGasSolidParticlesEmission)
+        val naturalGasGrossEmission = findViewById<TextView>(R.id.naturalGasGrossEmission)
 
         calculateButton.setOnClickListener {
             try {
-                val H = inputH.text.toString().toDouble()
-                val C = inputC.text.toString().toDouble()
-                val S = inputS.text.toString().toDouble()
-                val N = inputN.text.toString().toDouble()
-                val O = inputO.text.toString().toDouble()
-                val W = inputW.text.toString().toDouble()
-                val A = inputA.text.toString().toDouble()
+                val ashCollectorEfficiency = 0.985
 
-                val dryCoefficient = 100 / (100 - W)
-                val C_dry = C * dryCoefficient
-                val H_dry = H * dryCoefficient
-                val S_dry = S * dryCoefficient
-                val N_dry = N * dryCoefficient
-                val O_dry = O * dryCoefficient
-                val A_dry = A * dryCoefficient
+                val coalWorkingLHV = 20.47
+                val coalWorkingAshPercentage = 25.20
+                val coalFlyAshPercentage = 0.80
+                val coalCombustibleSubstancesInFlyAshPercentage = 1.5
+//                val coalCombustibleSubstancesInSlagPercentage = 0.5
 
-                dryMassH.text = "Водень (H): %.2f".format(H_dry)
-                dryMassC.text = "Вуглець (C): %.2f".format(C_dry)
-                dryMassS.text = "Сірка (S): %.2f".format(S_dry)
-                dryMassN.text = "Азот (N): %.2f".format(N_dry)
-                dryMassO.text = "Кисень (O): %.2f".format(O_dry)
-                dryMassA.text = "Зола (A): %.2f".format(A_dry)
+                val coalVolume = inputCoalVolume.text.toString().toDouble()
+                val oilFuelVolume = inputOilFuelVolume.text.toString().toDouble()
+                val naturalGasVolume = inputNaturalGasVolume.text.toString().toDouble()
 
-                val combustibleCoefficient = 100 / (100 - W - A)
-                val C_combustible = C * combustibleCoefficient
-                val H_combustible = H * combustibleCoefficient
-                val S_combustible = S * combustibleCoefficient
-                val N_combustible = N * combustibleCoefficient
-                val O_combustible = O * combustibleCoefficient
+                val coalSolidParticlesEmissionCalculated = (10.0.pow(6.0) / coalWorkingLHV) * coalFlyAshPercentage * (coalWorkingAshPercentage / (100 - coalCombustibleSubstancesInFlyAshPercentage)) * (1 - ashCollectorEfficiency)
+                val coalGrossEmissionCalculated = 10.0.pow(-6.0) * coalSolidParticlesEmissionCalculated * coalWorkingLHV * coalVolume
 
-                combustibleMassH.text = "Водень (H): %.2f".format(H_combustible)
-                combustibleMassC.text = "Вуглець (C): %.2f".format(C_combustible)
-                combustibleMassS.text = "Сірка (S): %.2f".format(S_combustible)
-                combustibleMassN.text = "Азот (N): %.2f".format(N_combustible)
-                combustibleMassO.text = "Кисень (O): %.2f".format(O_combustible)
+                coalSolidParticlesEmission.text = "Емісія твердих частинок при спалюванні: %.2f".format(coalSolidParticlesEmissionCalculated)
+                coalGrossEmission.text = "Валовий викид при спалюванні: %.2f".format(coalGrossEmissionCalculated)
 
-                val LHV = 339*C + 1030*H - 108.8*(O-S) - 25*W
-                val LHV_dry = ((LHV/1000+0.025*W)*(100/(100-W)))*1000
-                val LHV_combustible = ((LHV/1000+0.025*W)*(100/(100-W-A)))*1000
+                val oilFuelWorkingLHV = 39.48
+                val oilFuelWorkingAshPercentage = 0.15
+                val oilFuelFlyAshPercentage = 1
+                val oilFuelCombustibleSubstancesInFlyAshPercentage = 0
+//                val coalCombustibleSubstancesInSlagPercentage = 0.5
 
-                resultWorkingText.text = "Нижча робоча теплота згоряння: %.1f кДж/кг".format(LHV)
-                resultDryText.text = "Нижча суха теплота згоряння: %.1f кДж/кг".format(LHV_dry)
-                resultCombustibleText.text = "Нижча горюча теплота згоряння: %.1f кДж/кг".format(LHV_combustible)
+                val oilFuelSolidParticlesEmissionCalculated = (10.0.pow(6.0) / oilFuelWorkingLHV) * oilFuelFlyAshPercentage * (oilFuelWorkingAshPercentage / (100 - oilFuelCombustibleSubstancesInFlyAshPercentage)) * (1 - ashCollectorEfficiency)
+                val oilFuelGrossEmissionCalculated = 10.0.pow(-6.0) * oilFuelSolidParticlesEmissionCalculated * oilFuelWorkingLHV * oilFuelVolume
+
+                oilFuelSolidParticlesEmission.text = "Емісія твердих частинок при спалюванні: %.2f".format(oilFuelSolidParticlesEmissionCalculated)
+                oilFuelGrossEmission.text = "Валовий викид при спалюванні: %.2f".format(oilFuelGrossEmissionCalculated)
+
+                // оскільки при спалюванні природного газу тверді частинки відсутні, то емісія твердих частинок складає 0
+                val naturalGasSolidParticlesEmissionCalculated = 0.0
+                // як наслідок, валовий викид також складає 0, адже один з множників дорівнює 0
+                val naturalGasGrossEmissionCalculated = 0.0
+
+                naturalGasSolidParticlesEmission.text = "Емісія твердих частинок при спалюванні: %.2f".format(naturalGasSolidParticlesEmissionCalculated)
+                naturalGasGrossEmission.text = "Валовий викид при спалюванні: %.2f".format(naturalGasGrossEmissionCalculated)
 
             } catch (e: Exception) {
                 Toast.makeText(this, "Будь ласка, введіть правильні числові значення!",
